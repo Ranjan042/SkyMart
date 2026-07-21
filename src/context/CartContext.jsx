@@ -5,11 +5,11 @@ export const CartContext = createContext();
 const CartProvider = ({ children }) => {
 
   const LoadUserFromLs = () => {
-    return JSON.parse(localStorage.getItem('Loguser_sm')) || {}
+    return JSON.parse(localStorage.getItem('Loguser_sm'))
   };
 
   const [user, setuser] = useState(LoadUserFromLs());
-
+  console.log("user in context", user);
   const SaveCartToLS = (userId, cart) => {
     localStorage.setItem(`cart_${userId}`, JSON.stringify(cart || []));
   };
