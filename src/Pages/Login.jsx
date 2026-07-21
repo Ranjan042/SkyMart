@@ -1,6 +1,6 @@
 import React, { use, useState, useEffect } from 'react'
 import { Zap, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
-import { NavLink, useNavigate } from 'react-router'
+import { NavLink, useNavigate,NavLink } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
@@ -169,9 +169,9 @@ const Login = () => {
           {/* Footer — DM Sans */}
           <p className="font-dmsans text-center text-[#6b6b6b] text-xs mt-6">
             Don't have an account?{' '}
-            <a href="#" className="font-dmsans text-[#c8f537] font-semibold hover:underline">
+            <NavLink to="/register" href="#" className="font-dmsans text-[#c8f537] font-semibold hover:underline">
               Create one
-            </a>
+            </NavLink>
           </p>
         </div>
       </div>
