@@ -1,6 +1,6 @@
 import React, { use, useState, useEffect } from 'react'
 import { Zap, Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react'
-import { NavLink, useNavigate,NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
