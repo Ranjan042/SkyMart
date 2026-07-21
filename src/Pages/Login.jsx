@@ -172,6 +172,7 @@ const Login = () => {
             <NavLink to="/register" href="#" className="font-dmsans text-[#c8f537] font-semibold hover:underline">
               Create one
             </NavLink>
+            {/* Facing issues in Making it live so i am making another commit with this change */}
           </p>
         </div>
       </div>
