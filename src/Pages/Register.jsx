@@ -13,8 +13,63 @@ const Register = () => {
   const [showConfirm, setShowConfirm] = useState(false)
   const [RegisteredUsers, setRegisteredUsers] = useState(GetUsers());
 
-  const { register, handleSubmit, getValues, formState: { errors }, reset, setError } = useForm();
+  const { register, handleSubmit, getValues, formState: { errors }, reset, setError, watch } = useForm();
+  const password = watch("password", "");
 
+  const getPasswordStrength = (password) => {
+    let score = 0;
+
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isLong = password.length >= 8;
+
+    if (hasUpper) score++;
+    if (hasLower) score++;
+    if (hasNumber) score++;
+    if (hasSymbol) score++;
+    if (isLong) score++;
+
+    const levels = [
+      {
+        width: "0%",
+        text: "",
+        color: "transparent",
+      },
+      {
+        width: "20%",
+        text: "Very Weak",
+        color: "#c80000",
+      },
+      {
+        width: "40%",
+        text: "Weak",
+        color: "#ff0000",
+      },
+      {
+        width: "60%",
+        text: "Medium",
+        color: "#ec6a1f",
+      },
+      {
+        width: "80%",
+        text: "Strong",
+        color: "#b1eb2b",
+      },
+      {
+        width: "100%",
+        text: "Very Strong",
+        color: "#22c55e",
+      },
+    ];
+
+    return {
+      ...levels[score],
+    };
+  };
+
+  const strength = getPasswordStrength(password);
   useEffect(() => {
     console.log("Register in Mount");
     console.log(RegisteredUsers);
@@ -22,7 +77,7 @@ const Register = () => {
     return () => {
       console.log("Register in UnMount");
     }
-    
+
   }, [])
   console.log("Register in rerendering");
 
@@ -47,8 +102,8 @@ const Register = () => {
       return;
     }
 
-  const updatedUsers = [...RegisteredUsers, NewUser];
-  setRegisteredUsers(updatedUsers);
+    const updatedUsers = [...RegisteredUsers, NewUser];
+    setRegisteredUsers(updatedUsers);
     SavaUsers(updatedUsers);
     reset();
     navigate("/login");
@@ -149,6 +204,24 @@ const Register = () => {
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
+          </div>
+          <div className="mt-2">
+            <div className="h-2 bg-[#2b2b2b] rounded-full overflow-hidden">
+              <div
+                className="h-full transition-all duration-300"
+                style={{
+                  width: strength.width,
+                  backgroundColor: strength.color,
+                }}
+              />
+            </div>
+
+            <p
+              className="text-xs mt-2 font-semibold"
+              style={{ color: strength.color }}
+            >
+              {strength.text}
+            </p>
           </div>
 
           {errors.password && <p className="text-red-500 text-xs mt-1 font-syne">{errors.password.message}</p>}
