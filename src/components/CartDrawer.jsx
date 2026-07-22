@@ -1,17 +1,20 @@
 import React, { useContext } from 'react'
 import { ShoppingCart, X, Trash2, Plus, Minus, ArrowRight } from 'lucide-react'
 import { CartContext } from '../context/CartContext'
-// import { useNavigate } from 'react-router'
+import { NavLink } from 'react-router'
 
 const CartDrawer = () => {
 
   //The func comming from the cartContext
-  const {cart,isCartOpen,closeCart,cartCount,cartTotal,removeFromCart,updateQty,clearCart} = useContext(CartContext)
+  const {cart,isCartOpen,closeCart,cartCount,cartTotal,removeFromCart,updateQty,clearCart,openCart,RenderNotificationUi} = useContext(CartContext)
 
   // const navigate = useNavigate()
 
   const handleCheckout = () => {
     closeCart()
+    clearCart();
+
+    RenderNotificationUi("Checkout Successful(Demo)")
   }
 
   return (
@@ -62,6 +65,15 @@ const CartDrawer = () => {
               <p className="font-dmsans text-[#555] text-sm text-center">
                 Your cart is empty.<br />Add some products!
               </p>
+              <NavLink
+                onClick={closeCart}
+                to="/shop"
+                className="flex items-center gap-2 font-dmsans text-sm font-semibold text-[#c8f537] hover:text-[#c8f537]/80 transition-colors"
+              >
+                <ArrowRight className="w-4 h-4" />
+                Shop Now
+              </NavLink>
+
             </div>
           ) : (
             cart.map((item) => (

@@ -151,6 +151,8 @@ const Register = () => {
             </button>
           </div>
 
+          {errors.password && <p className="text-red-500 text-xs mt-1 font-syne">{errors.password.message}</p>}
+
           {/* Confirm Password */}
           <div className="flex items-center gap-3 bg-[#262626] rounded-2xl px-4 py-3.5 border border-transparent focus-within:border-[#c8f537]/40 transition-colors">
             <Lock className="w-4 h-4 text-[#6b6b6b] shrink-0" />
