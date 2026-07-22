@@ -96,7 +96,8 @@ const navigate = useNavigate();
 const Home = () => {
   const navigate = useNavigate()
   // const [user, setUser] = useState(null)
-  const {cart,user,addToCart,openCart} = useContext(CartContext);
+  const {cart,user,addToCart,openCart,cartCount, cartTotal} = useContext(CartContext);
+  console.log("cart in home", cart);
 
 
   useEffect(() => {
@@ -109,23 +110,18 @@ const Home = () => {
   }, [navigate])
 
   const firstName = user?.name?.split(' ')[0] || 'User'
-  
-  const cartValue=cart.reduce((sum,item)=>{
-    return sum+(item.price||0)*(item.qty||1)
-  },0)
-
   const STATS = [
     {
       icon: <Package className="w-4 h-4 text-[#c8f537]" />,
       bg: 'bg-[#c8f537]/10',
-      value: cart.length || 2,
+      value: cartCount || 0,
       label: 'Cart Items',
       sub: 'In your bag',
     },
     {
       icon: <TrendingUp className="w-4 h-4 text-blue-400" />,
       bg: 'bg-blue-400/10',
-      value: `$${cartValue > 0 ? cartValue.toFixed(2) : '599.98'}`,
+      value: `${cartTotal.toFixed(2)}`,
       label: 'Cart Value',
       sub: 'Ready to checkout',
     },

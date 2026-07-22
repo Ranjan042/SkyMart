@@ -19,6 +19,7 @@ const CartProvider = ({ children }) => {
   };
 
   const [cart, setcartState] = useState(() => LoadCartFromLS(user?.id));
+  console.log("cart in context", cart);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [notify, setnotify] = useState("");
   const setcart = (newCart) => {
